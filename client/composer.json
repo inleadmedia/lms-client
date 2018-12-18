@@ -1,0 +1,12 @@
+{
+  "name": "lms/client",
+  "description": "Library to make requests to LMS service.",
+  "type": "library",
+  "keywords": ["lms"],
+  "autoload": {
+    "psr-4": {
+      "LMS\\Client\\": "src"
+    }
+  },
+  "minimum-stability": "dev"
+}
