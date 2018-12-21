@@ -14,4 +14,9 @@ abstract class Service
     {
         $this->client = $client;
     }
+
+    public function getClient()
+    {
+        return $this->client;
+    }
 }

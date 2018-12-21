@@ -17,6 +17,12 @@ class OpenSearch extends Service implements RequestInterface
 
     public function request($uri) : ResponseInterface
     {
-        return;
+        $response = $this->getClient()->request('GET', $uri);
+        $content = $response->getBody()->getContents();
+
+        $response = new Response();
+        $response->set('content', $content);
+
+        return $response;
     }
 }

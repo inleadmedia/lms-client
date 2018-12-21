@@ -1,6 +1,6 @@
 <?php
 
-namespace LMS;
+namespace LMS\Client;
 
 interface RequestInterface
 {

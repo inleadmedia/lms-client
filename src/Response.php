@@ -12,8 +12,15 @@ use LMS\Client\ResponseInterface;
 class Response implements ResponseInterface
 {
 
+    private $properties;
+
     public function get($property)
     {
-        // TODO: Implement get() method.
+        return $this->properties[$property] ?? NULL;
+    }
+
+    public function set($property, $value)
+    {
+        $this->properties[$property] = $value;
     }
 }
