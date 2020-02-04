@@ -93,6 +93,7 @@ Performs a search request towards LMS.
 To create a search request, instantiate a `LMS\Request\Search` object.
 
 ```php
+use LMS\Client\Client;
 use LMS\Exception\LmsException;
 use LMS\Request\Details as DetailsRequest;
 use LMS\Request\Search as SearchRequest;
@@ -137,6 +138,7 @@ Performs a request for item details towards LMS.
 To create a details request, instantiate a `LMS\Request\Details` object.
 
 ```php
+use LMS\Client\Client;
 use LMS\Exception\LmsException;
 use LMS\Request\Details as DetailsRequest;
 use LMS\Request\Search as SearchRequest;
