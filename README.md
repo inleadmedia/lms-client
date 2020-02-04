@@ -12,7 +12,7 @@ where reference the repository:
 "repositories": {
     "lms-client": {
         "type": "vcs",
-        "url": "git@github.com:AnatolyMuntean/lms-client.git"
+        "url": "git@github.com:inleadmedia/lms-client.git"
     }
 },
 ```
