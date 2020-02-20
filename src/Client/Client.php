@@ -55,6 +55,10 @@ class Client implements ClientInterface
      */
     public function execute(RequestInterface $request)
     {
+        if (empty($this->serviceUrl)) {
+          throw new LmsException('Set the service URL using "ClientInterface::setUrl()" method.');
+        }
+
         $url = $this->serviceUrl . '/' . $request->getUri();
 
         $transportResult = $this->transport->request('GET', $url, $request->getParameters(), []);
@@ -64,7 +68,7 @@ class Client implements ClientInterface
         $rawData = json_decode($transportResult['data'], true);
 
         if (null === $rawData || $transportResult['code'] != 200) {
-            $message = !empty($rawData['message']) ? $rawData['message'] : '';
+            $message = !empty($rawData['message']) ? $rawData['message'] : ($transportResult['data'] ?? '');
 
             throw new LmsException("Failed to request data from url '{$url}'. Response code '{$transportResult['code']}'. Response message '{$message}'.");
         }
