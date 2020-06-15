@@ -58,7 +58,12 @@ class Details implements DetailsRequestInterface
         ];
     }
 
-    /**
+    public function getData() {
+      return [];
+      // TODO: Implement getData() method.
+    }
+
+  /**
      * Stringify the request object.
      *
      * @return string

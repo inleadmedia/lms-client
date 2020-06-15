@@ -2,9 +2,11 @@
 
 namespace LMS\Exception;
 
+use Exception;
+
 /**
  * Class LmsException.
  */
-class LmsException extends \Exception
+class LmsException extends Exception
 {
 }

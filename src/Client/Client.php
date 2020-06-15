@@ -12,17 +12,21 @@ class Client implements ClientInterface
 {
     private $transport;
 
-    /**
-     * Client constructor.
-     *
-     * @param \LMS\Client\HttpTransportInterface $transport
-     *   HTTP transport instance.
-     *
-     * TODO: Logger.
-     */
-    public function __construct(HttpTransportInterface $transport)
+    private $method = 'GET';
+
+  /**
+   * Client constructor.
+   *
+   * @param \LMS\Client\HttpTransportInterface $transport
+   *   HTTP transport instance.
+   * @param $method
+   *
+   * TODO: Logger.
+   */
+    public function __construct(HttpTransportInterface $transport, $method)
     {
         $this->transport = $transport;
+        $this->method = $method;
     }
 
     /**
@@ -61,7 +65,7 @@ class Client implements ClientInterface
 
         $url = $this->serviceUrl . '/' . $request->getUri();
 
-        $transportResult = $this->transport->request('GET', $url, $request->getParameters(), []);
+        $transportResult = $this->transport->request($this->method, $url, $request->getParameters(), $request->getData(), []);
         $this->validateTransportResult($transportResult);
 
         // TODO: Rely on object of some sort.

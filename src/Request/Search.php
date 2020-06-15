@@ -46,6 +46,13 @@ class Search implements SearchRequestInterface
      */
     protected $withMeta;
 
+    /**
+     * Include facets in request.
+     *
+     * @var bool
+     */
+    protected $withFacets;
+
     const SORT_RANKING = 'rank_general';
 
     const SORT_TITLE_ASCENDING = 'title_ascending';
@@ -81,13 +88,16 @@ class Search implements SearchRequestInterface
      *   Number of results per page.
      * @param bool $withMeta
      *   Include additional meta-data.
+     * @param bool $withFacets
+     *   Include facets.
      */
-    public function __construct($query, $page = 1, $amount = 10, $withMeta = false)
+    public function __construct($query, $page = 1, $amount = 10, $withMeta = false, $withFacets = TRUE)
     {
         $this->query = $query;
         $this->page = $page;
         $this->amount = $amount;
         $this->withMeta = $withMeta;
+        $this->withFacets = $withFacets;
         $this->sorting = self::SORT_RANKING;
     }
 
@@ -169,6 +179,8 @@ class Search implements SearchRequestInterface
             $parameters['withMeta'] = '';
         }
 
+        $parameters['availableFacets'] = '';
+
         return $parameters;
     }
 
@@ -178,21 +190,26 @@ class Search implements SearchRequestInterface
     public function parseResult(array $rawData)
     {
         if (!array_key_exists('hitCount', $rawData)) {
-            throw new LmsException("Search result expects a 'hitCount' key in response body.");
+          throw new LmsException("Search result expects a 'hitCount' key in response body.");
         }
         $hits = $rawData['hitCount'];
 
         if (!array_key_exists('objects', $rawData)) {
-            throw new LmsException("Search result expects an 'objects' key in response body.");
+          throw new LmsException("Search result expects an 'objects' key in response body.");
         }
         $rawObjects = $rawData['objects'];
 
         $objects = [];
         foreach ($rawObjects as $rawObject) {
-            $objects[] = new SearchObject($rawObject);
+          $objects[] = new SearchObject($rawObject);
         }
 
-        return new SearchResult($this, $objects, $hits);
+        $facets = [];
+        if (isset($rawData['facets'])) {
+          $facets = $rawData['facets'];
+        }
+
+        return new SearchResult($this, $objects, $hits, $facets);
     }
 
     /**
@@ -229,6 +246,22 @@ class Search implements SearchRequestInterface
     public function setWithMeta($withMeta)
     {
         $this->withMeta = (bool) $withMeta;
+    }
+
+    public function setWithFacets($withFacets) {
+      $this->withFacets = $withFacets;
+    }
+
+    public function getWithFacets() {
+      return $this->withFacets;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData() {
+        return [];
+        // TODO: Implement getData() method.
     }
 
     /**

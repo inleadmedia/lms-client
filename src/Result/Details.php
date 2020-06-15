@@ -2,13 +2,14 @@
 
 namespace LMS\Result;
 
+use JsonSerializable;
 use LMS\Object\SearchObject;
 use LMS\Request\RequestInterface;
 
 /**
  * Class Details.
  */
-class Details implements DetailsResultInterface, \JsonSerializable
+class Details implements DetailsResultInterface, JsonSerializable
 {
     /**
      * Request object.

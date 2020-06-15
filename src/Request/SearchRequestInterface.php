@@ -101,4 +101,8 @@ interface SearchRequestInterface extends RequestInterface
      *   This instance.
      */
     public function setWithMeta($withMeta);
+
+    public function getWithFacets();
+
+    public function setWithFacets($withFacets);
 }
