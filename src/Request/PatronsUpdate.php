@@ -3,38 +3,40 @@
 namespace LMS\Request;
 
 /**
- * Class Reservations
+ * Class PatronsUpdate
  *
  * @package LMS\Request
  */
-class Reservations implements ReservationsRequestInterface
+class PatronsUpdate implements PatronsUpdateRequestInterface
 {
 
     /**
      * @var string
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
      */
-    private $password;
+    protected $password;
 
     /**
      * @var array
      */
-    private $data = [];
+    protected $data;
 
     /**
-     * Reservations constructor.
+     * PatronsUpdate constructor.
      *
      * @param $username
      * @param $password
+     * @param $data
      */
-    public function __construct($username, $password)
+    public function __construct($username, $password, $data)
     {
         $this->username = $username;
         $this->password = $password;
+        $this->data = $data;
     }
 
     /**
@@ -42,7 +44,7 @@ class Reservations implements ReservationsRequestInterface
      */
     public function getUri()
     {
-        return 'patron/reservations';
+        return 'patron/info';
     }
 
     /**
@@ -51,25 +53,17 @@ class Reservations implements ReservationsRequestInterface
     public function getParameters()
     {
         return [
-            'user' => $this->username,
-            'pin' => $this->password,
+          'user' => $this->username,
+          'pin' => $this->password,
         ];
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getData()
     {
         return $this->data;
-    }
-
-    /**
-     * @param $data
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
     }
 
     /**

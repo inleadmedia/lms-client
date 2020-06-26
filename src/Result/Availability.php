@@ -9,27 +9,29 @@ use LMS\Request\RequestInterface;
  *
  * @package LMS\Result
  */
-class Availability implements AvailabilityResultInterface {
+class Availability implements AvailabilityResultInterface
+{
 
-  /**
-   * @var \LMS\Request\RequestInterface
-   */
-  protected $request;
+    /**
+     * @var \LMS\Request\RequestInterface
+     */
+    protected $request;
 
-  /**
-   * Availability constructor.
-   *
-   * @param \LMS\Request\RequestInterface $request
-   */
-  public function __construct(RequestInterface $request) {
-    $this->request = $request;
-  }
+    /**
+     * Availability constructor.
+     *
+     * @param \LMS\Request\RequestInterface $request
+     */
+    public function __construct(RequestInterface $request)
+    {
+        $this->request = $request;
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function getRequest() {
-    return $this->request;
-  }
-
+    /**
+     * @inheritDoc
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
 }

@@ -1,9 +1,13 @@
 <?php
 
-
 namespace LMS\Request;
 
-
-interface LoansRequestInterface extends RequestInterface {
+/**
+ * Interface LoansRequestInterface
+ *
+ * @package LMS\Request
+ */
+interface LoansRequestInterface extends RequestInterface
+{
 
 }

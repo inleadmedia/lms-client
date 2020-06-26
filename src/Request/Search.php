@@ -11,6 +11,31 @@ use LMS\Result\Search as SearchResult;
  */
 class Search implements SearchRequestInterface
 {
+
+    const SORT_RANKING = 'rank_general';
+
+    const SORT_TITLE_ASCENDING = 'title_ascending';
+
+    const SORT_TITLE_DESCENDING = 'title_descending';
+
+    const SORT_DATE_ASCENDING = 'date_ascending';
+
+    const SORT_DATE_DESCENDING = 'date_descending';
+
+    const SORT_CREATOR_ASCENDING = 'creator_ascending';
+
+    const SORT_CREATOR_DESCENDING = 'creator_descending';
+
+    const SORT_OPTIONS = [
+        self::SORT_RANKING,
+        self::SORT_DATE_ASCENDING,
+        self::SORT_DATE_DESCENDING,
+        self::SORT_TITLE_ASCENDING,
+        self::SORT_TITLE_DESCENDING,
+        self::SORT_CREATOR_ASCENDING,
+        self::SORT_CREATOR_DESCENDING,
+    ];
+
     /**
      * Search query phrase.
      *
@@ -53,30 +78,6 @@ class Search implements SearchRequestInterface
      */
     protected $withFacets;
 
-    const SORT_RANKING = 'rank_general';
-
-    const SORT_TITLE_ASCENDING = 'title_ascending';
-
-    const SORT_TITLE_DESCENDING = 'title_descending';
-
-    const SORT_DATE_ASCENDING = 'date_ascending';
-
-    const SORT_DATE_DESCENDING = 'date_descending';
-
-    const SORT_CREATOR_ASCENDING = 'creator_ascending';
-
-    const SORT_CREATOR_DESCENDING = 'creator_descending';
-
-    const SORT_OPTIONS = [
-        self::SORT_RANKING,
-        self::SORT_DATE_ASCENDING,
-        self::SORT_DATE_DESCENDING,
-        self::SORT_TITLE_ASCENDING,
-        self::SORT_TITLE_DESCENDING,
-        self::SORT_CREATOR_ASCENDING,
-        self::SORT_CREATOR_DESCENDING,
-    ];
-
     /**
      * Search constructor.
      *
@@ -91,8 +92,13 @@ class Search implements SearchRequestInterface
      * @param bool $withFacets
      *   Include facets.
      */
-    public function __construct($query, $page = 1, $amount = 10, $withMeta = false, $withFacets = TRUE)
-    {
+    public function __construct(
+        $query,
+        $page = 1,
+        $amount = 10,
+        $withMeta = false,
+        $withFacets = true
+    ) {
         $this->query = $query;
         $this->page = $page;
         $this->amount = $amount;
@@ -164,49 +170,26 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getParameters()
-    {
-        $offset = ($this->page - 1) * $this->amount;
-
-        $parameters = [
-            'query' => $this->query,
-            'step' => $this->amount,
-            'offset' => $offset,
-            'sort' => $this->sorting,
-        ];
-
-        if (true === $this->withMeta) {
-            $parameters['withMeta'] = '';
-        }
-
-        $parameters['availableFacets'] = '';
-
-        return $parameters;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function parseResult(array $rawData)
     {
         if (!array_key_exists('hitCount', $rawData)) {
-          throw new LmsException("Search result expects a 'hitCount' key in response body.");
+            throw new LmsException("Search result expects a 'hitCount' key in response body.");
         }
         $hits = $rawData['hitCount'];
 
         if (!array_key_exists('objects', $rawData)) {
-          throw new LmsException("Search result expects an 'objects' key in response body.");
+            throw new LmsException("Search result expects an 'objects' key in response body.");
         }
         $rawObjects = $rawData['objects'];
 
         $objects = [];
         foreach ($rawObjects as $rawObject) {
-          $objects[] = new SearchObject($rawObject);
+            $objects[] = new SearchObject($rawObject);
         }
 
         $facets = [];
         if (isset($rawData['facets'])) {
-          $facets = $rawData['facets'];
+            $facets = $rawData['facets'];
         }
 
         return new SearchResult($this, $objects, $hits, $facets);
@@ -245,21 +228,34 @@ class Search implements SearchRequestInterface
      */
     public function setWithMeta($withMeta)
     {
-        $this->withMeta = (bool) $withMeta;
+        $this->withMeta = (bool)$withMeta;
     }
 
-    public function setWithFacets($withFacets) {
-      $this->withFacets = $withFacets;
+    /**
+     * Get facets setting value.
+     *
+     * @return bool
+     */
+    public function getWithFacets()
+    {
+        return $this->withFacets;
     }
 
-    public function getWithFacets() {
-      return $this->withFacets;
+    /**
+     * Whether to include additional facets in result.
+     *
+     * @param $withFacets
+     */
+    public function setWithFacets($withFacets)
+    {
+        $this->withFacets = $withFacets;
     }
 
     /**
      * @return array
      */
-    public function getData() {
+    public function getData()
+    {
         return [];
         // TODO: Implement getData() method.
     }
@@ -274,5 +270,28 @@ class Search implements SearchRequestInterface
     {
         // TODO: This might behave unexpectedly, when 'withMeta' param is NULL.
         return implode('-', array_filter($this->getParameters()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParameters()
+    {
+        $offset = ($this->page - 1) * $this->amount;
+
+        $parameters = [
+            'query' => $this->query,
+            'step' => $this->amount,
+            'offset' => $offset,
+            'sort' => $this->sorting,
+        ];
+
+        if (true === $this->withMeta) {
+            $parameters['withMeta'] = '';
+        }
+
+        $parameters['availableFacets'] = '';
+
+        return $parameters;
     }
 }

@@ -1,46 +1,69 @@
 <?php
 
-
 namespace LMS\Request;
 
+/**
+ * Class Loans
+ *
+ * @package LMS\Request
+ */
+class Loans implements LoansRequestInterface
+{
 
-class Loans implements LoansRequestInterface {
+    /**
+     * @var string
+     */
+    private $username;
 
+    /**
+     * @var string
+     */
+    private $password;
 
-  private $username;
-  private $password;
+    /**
+     * Loans constructor.
+     *
+     * @param $username
+     * @param $password
+     */
+    public function __construct($username, $password)
+    {
+        $this->username = $username;
+        $this->password = $password;
+    }
 
-  public function __construct($username, $password) {
-    $this->username = $username;
-    $this->password = $password;
-  }
+    /**
+     * @inheritDoc
+     */
+    public function getUri()
+    {
+        return 'patron/loans';
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function getUri() {
-    return 'patron/loans';
-  }
+    /**
+     * @inheritDoc
+     */
+    public function getParameters()
+    {
+        return [
+            'user' => $this->username,
+            'pin' => $this->password,
+        ];
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function getParameters() {
-    return [
-      'user' => $this->username,
-      'pin' => $this->password
-    ];
-  }
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return [];
+    }
 
-  public function getData() {
-    return [];
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public function parseResult(array $rawData) {
-    // TODO: Implement parseResult() method.
-  }
-
+    /**
+     * @inheritDoc
+     */
+    public function parseResult(array $rawData)
+    {
+        // TODO: Implement parseResult() method.
+    }
 }

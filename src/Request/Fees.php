@@ -1,45 +1,69 @@
 <?php
 
-
 namespace LMS\Request;
 
+/**
+ * Class Fees
+ *
+ * @package LMS\Request
+ */
+class Fees implements FeesRequestInterface
+{
 
-class Fees implements FeesRequestInterface {
+    /**
+     * @var string
+     */
+    private $username;
 
-  private $username;
-  private $password;
+    /**
+     * @var string
+     */
+    private $password;
 
-  public function __construct($username, $password) {
-    $this->username = $username;
-    $this->password = $password;
-  }
+    /**
+     * Fees constructor.
+     *
+     * @param $username
+     * @param $password
+     */
+    public function __construct($username, $password)
+    {
+        $this->username = $username;
+        $this->password = $password;
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function getUri() {
-    return 'patron/fees';
-  }
+    /**
+     * @inheritDoc
+     */
+    public function getUri()
+    {
+        return 'patron/fees';
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function getParameters() {
-    return [
-      'user' => $this->username,
-      'pin' => $this->password
-    ];
-  }
+    /**
+     * @inheritDoc
+     */
+    public function getParameters()
+    {
+        return [
+            'user' => $this->username,
+            'pin' => $this->password,
+        ];
+    }
 
-  public function getData() {
-    return [];
-  }
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return [];
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function parseResult(array $rawData) {
-    // TODO: Implement parseResult() method.
-  }
-
+    /**
+     * @inheritDoc
+     */
+    public function parseResult(array $rawData)
+    {
+        // TODO: Implement parseResult() method.
+    }
 }

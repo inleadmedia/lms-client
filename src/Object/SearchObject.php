@@ -9,16 +9,27 @@ namespace LMS\Object;
  */
 class SearchObject
 {
+
     public $id;
+
     public $faustNumber;
+
     public $bibliofilid;
+
     public $title;
+
     public $author;
+
     public $type;
+
     public $subject;
+
     public $year;
+
     public $description;
+
     public $meta;
+
     public $cover;
 
     /**

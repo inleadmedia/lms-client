@@ -10,7 +10,9 @@ use LMS\Result\Details as DetailsResult;
  */
 class Details implements DetailsRequestInterface
 {
-
+    /**
+     * @var int
+     */
     protected $id;
 
     /**
@@ -58,12 +60,15 @@ class Details implements DetailsRequestInterface
         ];
     }
 
-    public function getData() {
-      return [];
-      // TODO: Implement getData() method.
+    /**
+     * {@inheritdoc}
+     */
+    public function getData()
+    {
+        return [];
     }
 
-  /**
+    /**
      * Stringify the request object.
      *
      * @return string

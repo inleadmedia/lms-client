@@ -11,6 +11,7 @@ use LMS\Request\RequestInterface;
  */
 class Details implements DetailsResultInterface, JsonSerializable
 {
+
     /**
      * Request object.
      *
@@ -60,6 +61,6 @@ class Details implements DetailsResultInterface, JsonSerializable
      */
     public function jsonSerialize()
     {
-        return (array) $this->object;
+        return (array)$this->object;
     }
 }

@@ -1,9 +1,13 @@
 <?php
 
-
 namespace LMS\Request;
 
-
-interface HoldingsRequestInterface extends RequestInterface {
+/**
+ * Interface HoldingsRequestInterface
+ *
+ * @package LMS\Request
+ */
+interface HoldingsRequestInterface extends RequestInterface
+{
 
 }

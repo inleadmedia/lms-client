@@ -1,49 +1,71 @@
 <?php
 
-
 namespace LMS\Request;
-
 
 use LMS\Result\Holdings as HoldingsResult;
 
-class Holdings implements HoldingsRequestInterface {
+/**
+ * Class Holdings
+ *
+ * @package LMS\Request
+ */
+class Holdings implements HoldingsRequestInterface
+{
 
-  protected $id;
+    /**
+     * @var int
+     */
+    protected $id;
 
-  public function __construct($id) {
-    $this->id = $id;
-  }
+    /**
+     * Holdings constructor.
+     *
+     * @param $id
+     */
+    public function __construct($id)
+    {
+        $this->id = $id;
+    }
 
-  public function getId() {
-    return $this->id;
-  }
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function getUri() {
-    return 'holdings';
-  }
+    /**
+     * @inheritDoc
+     */
+    public function getUri()
+    {
+        return 'holdings';
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function getParameters() {
-    return [
-      'id' => $this->id
-    ];
-  }
+    /**
+     * @inheritDoc
+     */
+    public function getParameters()
+    {
+        return [
+            'id' => $this->id,
+        ];
+    }
 
-  public function getData() {
-    // TODO: Implement getData() method.
-    return [];
-  }
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return [];
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function parseResult(array $rawData) {
-    return new HoldingsResult($this);
-  }
-
+    /**
+     * @inheritDoc
+     */
+    public function parseResult(array $rawData)
+    {
+        return new HoldingsResult($this);
+    }
 }

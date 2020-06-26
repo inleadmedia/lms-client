@@ -1,58 +1,89 @@
 <?php
 
-
 namespace LMS\Request;
 
+/**
+ * Class ReservationsDelete
+ *
+ * @package LMS\Request
+ */
+class ReservationsDelete implements ReservationsRequestInterface
+{
 
-class ReservationsDelete implements ReservationsRequestInterface {
-  private $username;
-  private $password;
-  private $reservationId;
+    /**
+     * @var string
+     */
+    private $username;
 
-  public function __construct($username, $password, $reservationId) {
-    $this->username = $username;
-    $this->password = $password;
-    $this->reservationId = $reservationId;
-  }
+    /**
+     * @var string
+     */
+    private $password;
 
-  /**
-   * Gets uri path component for current action.
-   *
-   * @return string
-   *   Uri path component where actual action can be accessed.
-   */
-  public function getUri() {
-    return 'patron/reservations';
-  }
+    /**
+     * @var int
+     */
+    private $reservationId;
 
-  /**
-   * Gets the request parameters for current action.
-   *
-   * @return array
-   *   A set of parameters to be sent with the request.
-   */
-  public function getParameters() {
-    return [
-      'user' => $this->username,
-      'pin' => $this->password,
-      'reservationId' => $this->reservationId,
-    ];
-  }
+    /**
+     * ReservationsDelete constructor.
+     *
+     * @param $username
+     * @param $password
+     * @param $reservationId
+     */
+    public function __construct($username, $password, $reservationId)
+    {
+        $this->username = $username;
+        $this->password = $password;
+        $this->reservationId = $reservationId;
+    }
 
-  public function getData() {
-    return [];
-  }
+    /**
+     * Gets uri path component for current action.
+     *
+     * @return string
+     *   Uri path component where actual action can be accessed.
+     */
+    public function getUri()
+    {
+        return 'patron/reservations';
+    }
 
-  /**
-   * Parses the raw result into an usable object.
-   *
-   * @param array $rawData
-   *   Raw result from service.
-   *
-   * @return \LMS\Result\ResultInterface
-   *   Raw result.
-   */
-  public function parseResult(array $rawData) {
-    // TODO: Implement parseResult() method.
-  }
+    /**
+     * Gets the request parameters for current action.
+     *
+     * @return array
+     *   A set of parameters to be sent with the request.
+     */
+    public function getParameters()
+    {
+        return [
+            'user' => $this->username,
+            'pin' => $this->password,
+            'reservationId' => $this->reservationId,
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return [];
+    }
+
+    /**
+     * Parses the raw result into an usable object.
+     *
+     * @param array $rawData
+     *   Raw result from service.
+     *
+     * @return void Raw result.
+     *   Raw result.
+     */
+    public function parseResult(array $rawData)
+    {
+        // TODO: Implement parseResult() method.
+    }
 }

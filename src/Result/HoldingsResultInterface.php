@@ -1,9 +1,13 @@
 <?php
 
-
 namespace LMS\Result;
 
-
-interface HoldingsResultInterface extends ResultInterface {
+/**
+ * Interface HoldingsResultInterface
+ *
+ * @package LMS\Result
+ */
+interface HoldingsResultInterface extends ResultInterface
+{
 
 }

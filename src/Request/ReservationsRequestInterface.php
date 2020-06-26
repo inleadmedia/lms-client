@@ -1,9 +1,13 @@
 <?php
 
-
 namespace LMS\Request;
 
-
-interface ReservationsRequestInterface extends RequestInterface {
+/**
+ * Interface ReservationsRequestInterface
+ *
+ * @package LMS\Request
+ */
+interface ReservationsRequestInterface extends RequestInterface
+{
 
 }

@@ -9,27 +9,29 @@ use LMS\Request\RequestInterface;
  *
  * @package LMS\Result
  */
-class Holdings implements HoldingsResultInterface {
+class Holdings implements HoldingsResultInterface
+{
 
-  /**
-   * @var \LMS\Request\RequestInterface
-   */
-  protected $request;
+    /**
+     * @var \LMS\Request\RequestInterface
+     */
+    protected $request;
 
-  /**
-   * Holdings constructor.
-   *
-   * @param \LMS\Request\RequestInterface $request
-   */
-  public function __construct(RequestInterface $request) {
-    $this->request = $request;
-  }
+    /**
+     * Holdings constructor.
+     *
+     * @param \LMS\Request\RequestInterface $request
+     */
+    public function __construct(RequestInterface $request)
+    {
+        $this->request = $request;
+    }
 
-  /**
-   * @inheritDoc
-   */
-  public function getRequest() {
-    return $this->request;
-  }
-
+    /**
+     * @inheritDoc
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
 }

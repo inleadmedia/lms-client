@@ -3,30 +3,30 @@
 namespace LMS\Request;
 
 /**
- * Class Reservations
+ * Class Patrons
  *
  * @package LMS\Request
  */
-class Reservations implements ReservationsRequestInterface
+class Patrons implements PatronsRequestInterface
 {
 
     /**
      * @var string
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
      */
-    private $password;
+    protected $password;
 
     /**
      * @var array
      */
-    private $data = [];
+    protected $data = [];
 
     /**
-     * Reservations constructor.
+     * Patrons constructor.
      *
      * @param $username
      * @param $password
@@ -42,7 +42,7 @@ class Reservations implements ReservationsRequestInterface
      */
     public function getUri()
     {
-        return 'patron/reservations';
+        return 'patron/info';
     }
 
     /**
