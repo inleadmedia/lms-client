@@ -1,5 +1,5 @@
 {
-  "name": "inleadmedia/lms-library",
+  "name": "inleadmedia/lms-client",
   "description": "Provides integration with LMS services",
   "require": {
     "php": ">=5.6.0"
