@@ -80,10 +80,9 @@ class Suggestions implements SuggestionsRequestInterface
         foreach ($hits as $hit) {
             $title = false;
             if (isset($hit['title'])) {
-              $title = $hit['title'];
-            }
-            elseif (isset($hit['subject'])) {
-              $title = $hit['subject'];
+                $title = $hit['title'];
+            } elseif (isset($hit['subject'])) {
+                $title = $hit['subject'];
             }
             $val = truncate_utf8($title, 60, true, true, 1);
             $key = truncate_utf8($title, 256, true, false, 1);

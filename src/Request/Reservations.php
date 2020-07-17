@@ -2,6 +2,8 @@
 
 namespace LMS\Request;
 
+use LMS\Result\Reservations as ReservationsResult;
+
 /**
  * Class Reservations
  *
@@ -26,15 +28,22 @@ class Reservations implements ReservationsRequestInterface
     private $data = [];
 
     /**
+     * @var string
+     */
+    private $provider;
+
+    /**
      * Reservations constructor.
      *
      * @param $username
      * @param $password
+     * @param $provider
      */
-    public function __construct($username, $password)
+    public function __construct($username, $password, $provider)
     {
         $this->username = $username;
         $this->password = $password;
+        $this->provider = $provider;
     }
 
     /**
@@ -77,6 +86,23 @@ class Reservations implements ReservationsRequestInterface
      */
     public function parseResult(array $rawData)
     {
-        // TODO: Implement parseResult() method.
+        $objects = [];
+
+        // @TODO: Find more adequate way to handle this.
+        switch ($this->provider) {
+            case 'bibliofil':
+                $provider = '\LMS\Object\Bibliofil\ReservationObject';
+                break;
+
+            default:
+                $provider = '\LMS\Object\FBS\ReservationObject';
+                break;
+        }
+
+        foreach ($rawData as $rawObject) {
+            $objects[] = new $provider($rawObject);
+        }
+
+        return new ReservationsResult($this, $objects);
     }
 }

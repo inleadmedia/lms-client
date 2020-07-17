@@ -2,6 +2,9 @@
 
 namespace LMS\Request;
 
+use LMS\Object\LoanObject;
+use LMS\Result\Loans as LoansResult;
+
 /**
  * Class Loans
  *
@@ -64,6 +67,12 @@ class Loans implements LoansRequestInterface
      */
     public function parseResult(array $rawData)
     {
-        // TODO: Implement parseResult() method.
+        $objects = [];
+
+        foreach ($rawData as $rawObject) {
+            $objects[] = new LoanObject($rawObject);
+        }
+
+        return new LoansResult($this, $objects);
     }
 }
