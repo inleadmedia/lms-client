@@ -23,6 +23,8 @@ interface RequestInterface
      */
     public function getParameters();
 
+    public function getData();
+
     /**
      * Parses the raw result into an usable object.
      *

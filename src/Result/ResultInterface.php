@@ -7,6 +7,7 @@ namespace LMS\Result;
  */
 interface ResultInterface
 {
+
     /**
      * Gets the request object.
      *

@@ -7,6 +7,7 @@ namespace LMS\Client;
  */
 interface HttpTransportInterface
 {
+
     /**
      * Executes a request.
      *
@@ -16,11 +17,19 @@ interface HttpTransportInterface
      *   Target url.
      * @param array $payload
      *   Request payload.
+     * @param array $data
+     *   Request data.
      * @param array $headers
      *   Additional headers.
      *
      * @return array
      *   Request result.
      */
-    public function request($method, $url, array $payload = [], array $headers = []);
+    public function request(
+        $method,
+        $url,
+        array $payload = [],
+        array $data = [],
+        array $headers = []
+    );
 }
