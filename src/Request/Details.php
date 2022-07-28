@@ -10,7 +10,6 @@ use LMS\Result\Details as DetailsResult;
  */
 class Details implements DetailsRequestInterface
 {
-
     protected $id;
 
     /**

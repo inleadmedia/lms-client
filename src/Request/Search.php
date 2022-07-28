@@ -46,21 +46,21 @@ class Search implements SearchRequestInterface
      */
     protected $withMeta;
 
-    const SORT_RANKING = 'rank_general';
+    public const SORT_RANKING = 'rank_general';
 
-    const SORT_TITLE_ASCENDING = 'title_ascending';
+    public const SORT_TITLE_ASCENDING = 'title_ascending';
 
-    const SORT_TITLE_DESCENDING = 'title_descending';
+    public const SORT_TITLE_DESCENDING = 'title_descending';
 
-    const SORT_DATE_ASCENDING = 'date_ascending';
+    public const SORT_DATE_ASCENDING = 'date_ascending';
 
-    const SORT_DATE_DESCENDING = 'date_descending';
+    public const SORT_DATE_DESCENDING = 'date_descending';
 
-    const SORT_CREATOR_ASCENDING = 'creator_ascending';
+    public const SORT_CREATOR_ASCENDING = 'creator_ascending';
 
-    const SORT_CREATOR_DESCENDING = 'creator_descending';
+    public const SORT_CREATOR_DESCENDING = 'creator_descending';
 
-    const SORT_OPTIONS = [
+    public const SORT_OPTIONS = [
         self::SORT_RANKING,
         self::SORT_DATE_ASCENDING,
         self::SORT_DATE_DESCENDING,

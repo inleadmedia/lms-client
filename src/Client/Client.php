@@ -56,7 +56,7 @@ class Client implements ClientInterface
     public function execute(RequestInterface $request)
     {
         if (empty($this->serviceUrl)) {
-          throw new LmsException('Set the service URL using "ClientInterface::setUrl()" method.');
+            throw new LmsException('Set the service URL using "ClientInterface::setUrl()" method.');
         }
 
         $url = $this->serviceUrl . '/' . $request->getUri();
@@ -83,10 +83,11 @@ class Client implements ClientInterface
      *   Raw http response.
      * @throws \LMS\Exception\LmsException
      */
-    private function validateTransportResult(array $result) {
+    private function validateTransportResult(array $result)
+    {
         foreach (['data', 'code'] as $key) {
             if (!array_key_exists($key, $result)) {
-                throw new LmsException('Transport response array should include a "'.$key.'" key.');
+                throw new LmsException('Transport response array should include a "' . $key . '" key.');
             }
         }
     }
