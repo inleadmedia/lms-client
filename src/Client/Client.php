@@ -35,7 +35,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function setUrl($serviceUrl)
+    public function setUrl(string $serviceUrl): ClientInterface
     {
         $this->serviceUrl = $serviceUrl;
 
@@ -45,7 +45,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->getUrl();
     }
@@ -53,7 +53,7 @@ class Client implements ClientInterface
     /**
      * {@inheritdoc}
      */
-    public function execute(RequestInterface $request)
+    public function execute(RequestInterface $request): array
     {
         if (empty($this->serviceUrl)) {
             throw new LmsException('Set the service URL using "ClientInterface::setUrl()" method.');
@@ -83,7 +83,7 @@ class Client implements ClientInterface
      *   Raw http response.
      * @throws \LMS\Exception\LmsException
      */
-    private function validateTransportResult(array $result)
+    private function validateTransportResult(array $result): void
     {
         foreach (['data', 'code'] as $key) {
             if (!array_key_exists($key, $result)) {

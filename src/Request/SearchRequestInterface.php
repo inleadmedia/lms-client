@@ -13,7 +13,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return int
      *   The amount of results per page.
      */
-    public function getAmount();
+    public function getAmount(): int;
 
     /**
      * Sets per page amount of results.
@@ -24,7 +24,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return \LMS\Request\SearchRequestInterface
      *   This instance.
      */
-    public function setAmount($amount);
+    public function setAmount(int $amount): SearchRequestInterface;
 
     /**
      * Gets page number.
@@ -32,7 +32,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return int
      *   Current page number.
      */
-    public function getPage();
+    public function getPage(): int;
 
     /**
      * Sets page number.
@@ -43,7 +43,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return \LMS\Request\SearchRequestInterface
      *   This instance.
      */
-    public function setPage($page);
+    public function setPage(int $page): SearchRequestInterface;
 
     /**
      * Gets search query.
@@ -51,7 +51,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return string
      *   Searched string.
      */
-    public function getQuery();
+    public function getQuery(): string;
 
     /**
      * Sets search query.
@@ -62,7 +62,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return \LMS\Request\SearchRequestInterface
      *   This instance.
      */
-    public function setQuery($query);
+    public function setQuery(string $query): SearchRequestInterface;
 
     /**
      * Gets result sorting.
@@ -70,7 +70,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return string
      *   Current sorting approach.
      */
-    public function getSorting();
+    public function getSorting(): string;
 
     /**
      * Sets expected result sorting.
@@ -81,7 +81,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return \LMS\Request\SearchRequestInterface
      *   This instance.
      */
-    public function setSorting($sorting);
+    public function setSorting(string $sorting): SearchRequestInterface;
 
     /**
      * Get meta-data setting value.
@@ -89,7 +89,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return bool
      *   Whether additional meta-data is included.
      */
-    public function getWithMeta();
+    public function getWithMeta(): bool;
 
     /**
      * Whether to include additional meta-data in result.
@@ -100,5 +100,5 @@ interface SearchRequestInterface extends RequestInterface
      * @return \LMS\Request\SearchRequestInterface
      *   This instance.
      */
-    public function setWithMeta($withMeta);
+    public function setWithMeta(bool $withMeta): SearchRequestInterface;
 }

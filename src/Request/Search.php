@@ -4,7 +4,9 @@ namespace LMS\Request;
 
 use LMS\Exception\LmsException;
 use LMS\Object\SearchObject;
+use LMS\Result\ResultInterface;
 use LMS\Result\Search as SearchResult;
+use LMS\Result\SearchResultInterface;
 
 /**
  * Class Search.
@@ -82,7 +84,7 @@ class Search implements SearchRequestInterface
      * @param bool $withMeta
      *   Include additional meta-data.
      */
-    public function __construct($query, $page = 1, $amount = 10, $withMeta = false)
+    public function __construct(string $query, int $page = 1, int $amount = 10, bool $withMeta = false)
     {
         $this->query = $query;
         $this->page = $page;
@@ -94,7 +96,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return $this->amount;
     }
@@ -102,7 +104,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setAmount($amount)
+    public function setAmount($amount): SearchRequestInterface
     {
         $this->amount = $amount;
     }
@@ -110,7 +112,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getPage()
+    public function getPage(): int
     {
         return $this->page;
     }
@@ -118,7 +120,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setPage($page)
+    public function setPage(int $page): SearchRequestInterface
     {
         $this->page = $page;
 
@@ -128,7 +130,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getQuery()
+    public function getQuery(): string
     {
         return $this->query;
     }
@@ -136,7 +138,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setQuery($query)
+    public function setQuery(string $query): SearchRequestInterface
     {
         $this->query = $query;
 
@@ -146,7 +148,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getUri()
+    public function getUri(): string
     {
         return 'search';
     }
@@ -154,7 +156,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         $offset = ($this->page - 1) * $this->amount;
 
@@ -175,7 +177,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function parseResult(array $rawData)
+    public function parseResult(array $rawData): ResultInterface
     {
         if (!array_key_exists('hitCount', $rawData)) {
             throw new LmsException("Search result expects a 'hitCount' key in response body.");
@@ -198,7 +200,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getSorting()
+    public function getSorting(): string
     {
         return $this->sorting;
     }
@@ -206,7 +208,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setSorting($sorting)
+    public function setSorting(string $sorting): SearchRequestInterface
     {
         if (!in_array($sorting, self::SORT_OPTIONS)) {
             throw new LmsException("Sorting option '{$sorting}' is not supported.");
@@ -218,7 +220,7 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getWithMeta()
+    public function getWithMeta(): bool
     {
         return $this->withMeta;
     }
@@ -226,9 +228,11 @@ class Search implements SearchRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function setWithMeta($withMeta)
+    public function setWithMeta(bool $withMeta): SearchRequestInterface
     {
         $this->withMeta = (bool) $withMeta;
+
+        return $this;
     }
 
     /**

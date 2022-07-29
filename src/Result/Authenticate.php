@@ -28,208 +28,218 @@ class Authenticate implements AuthenticationResultInterface, ResultInterface
 
     protected $smsNotification;
 
-  /**
-   * @param mixed $name
-   *
-   * @return Authenticate
-   */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-  /**
-   * @param mixed $address
-   *
-   * @return Authenticate
-   */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-        return $this;
-    }
-
-  /**
-   * @param mixed $birthDate
-   *
-   * @return Authenticate
-   */
-    public function setBirthDate($birthDate)
-    {
-        $this->birthDate = $birthDate;
-        return $this;
-    }
-
-  /**
-   * @param mixed $defaultInterestPeriod
-   *
-   * @return Authenticate
-   */
-    public function setDefaultInterestPeriod($defaultInterestPeriod)
-    {
-        $this->defaultInterestPeriod = $defaultInterestPeriod;
-        return $this;
-    }
-
-  /**
-   * @param mixed $email
-   *
-   * @return Authenticate
-   */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-  /**
-   * @param mixed $onHold
-   *
-   * @return Authenticate
-   */
-    public function setOnHold($onHold)
-    {
-        $this->onHold = $onHold;
-        return $this;
-    }
-
-  /**
-   * @param mixed $phone
-   *
-   * @return Authenticate
-   */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-        return $this;
-    }
-
-  /**
-   * @param mixed $preferredBranch
-   *
-   * @return Authenticate
-   */
-    public function setPreferredBranch($preferredBranch)
-    {
-        $this->preferredBranch = $preferredBranch;
-        return $this;
-    }
-
-  /**
-   * @param mixed $emailNotification
-   *
-   * @return Authenticate
-   */
-    public function setEmailNotification($emailNotification)
-    {
-        $this->emailNotification = $emailNotification;
-        return $this;
-    }
-
-  /**
-   * @param mixed $smsNotification
-   *
-   * @return Authenticate
-   */
-    public function setSmsNotification($smsNotification)
-    {
-        $this->smsNotification = $smsNotification;
-        return $this;
-    }
-
-  /**
-   * @param \LMS\Request\RequestInterface $request
-   */
+    /**
+     * @param \LMS\Request\RequestInterface $request
+     */
     public function __construct(RequestInterface $request)
     {
         $this->request = $request;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param array $address
+     *
+     * @return $this
+     */
+    public function setAddress(array $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @param string $birthDate
+     *
+     * @return $this
+     */
+    public function setBirthDate(string $birthDate): self
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * @param int $defaultInterestPeriod
+     *
+     * @return $this
+     */
+    public function setDefaultInterestPeriod(int $defaultInterestPeriod): self
+    {
+        $this->defaultInterestPeriod = $defaultInterestPeriod;
+
+        return $this;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return $this
+     */
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @param array $onHold
+     *
+     * @return $this
+     */
+    public function setOnHold(array $onHold): self
+    {
+        $this->onHold = $onHold;
+
+        return $this;
+    }
+
+    /**
+     * @param string $phone
+     *
+     * @return $this
+     */
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @param string $preferredBranch
+     *
+     * @return $this
+     */
+    public function setPreferredBranch(string $preferredBranch): self
+    {
+        $this->preferredBranch = $preferredBranch;
+
+        return $this;
+    }
+
+    /**
+     * @param bool $emailNotification
+     *
+     * @return $this
+     */
+    public function setEmailNotification(bool $emailNotification): self
+    {
+        $this->emailNotification = $emailNotification;
+
+        return $this;
+    }
+
+    /**
+     * @param bool $smsNotification
+     *
+     * @return $this
+     */
+    public function setSmsNotification(bool $smsNotification): self
+    {
+        $this->smsNotification = $smsNotification;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function getAddress(): array
     {
         return $this->address;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function getBirthDate(): string
     {
         return $this->birthDate;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function getDefaultInterestPeriod(): int
     {
         return $this->defaultInterestPeriod;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function getOnHold(): array
     {
         return $this->onHold;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function getPhone(): string
     {
         return $this->phone;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function getPreferredBranch(): string
     {
         return $this->preferredBranch;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function isEmailNotification(): bool
     {
         return $this->emailNotification;
     }
 
-  /**
-   * {@inheritDoc}
-   */
+    /**
+     * {@inheritDoc}
+     */
     public function isSmsNotification(): bool
     {
         return $this->smsNotification;
     }
 
-  /**
-   * {@inheritDoc}
-   */
-    public function getRequest()
+    /**
+     * {@inheritDoc}
+     */
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }

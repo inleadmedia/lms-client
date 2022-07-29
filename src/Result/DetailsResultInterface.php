@@ -14,5 +14,5 @@ interface DetailsResultInterface extends ResultInterface
      *
      * @return \LMS\Object\SearchObject
      */
-    public function getObject();
+    public function getObject(): SearchObject;
 }

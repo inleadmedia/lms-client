@@ -22,5 +22,5 @@ interface HttpTransportInterface
      * @return array
      *   Request result.
      */
-    public function request($method, $url, array $payload = [], array $headers = []);
+    public function request(string $method, string $url, array $payload = [], array $headers = []): array;
 }

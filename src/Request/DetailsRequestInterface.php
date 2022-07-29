@@ -12,5 +12,5 @@ interface DetailsRequestInterface extends RequestInterface
      *
      * @return string
      */
-    public function getId();
+    public function getId(): string;
 }

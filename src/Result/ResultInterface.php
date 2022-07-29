@@ -2,6 +2,8 @@
 
 namespace LMS\Result;
 
+use LMS\Request\RequestInterface;
+
 /**
  * Interface Result.
  */
@@ -13,5 +15,5 @@ interface ResultInterface
      * @return \LMS\Request\RequestInterface
      *   Request object.
      */
-    public function getRequest();
+    public function getRequest(): RequestInterface;
 }

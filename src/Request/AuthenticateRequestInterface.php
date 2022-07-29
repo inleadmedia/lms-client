@@ -4,7 +4,13 @@ namespace LMS\Request;
 
 interface AuthenticateRequestInterface
 {
-    public function getName();
+    /**
+     * @return string
+     */
+    public function getName(): string;
 
-    public function getPin();
+    /**
+     * @return string
+     */
+    public function getPin(): string;
 }
