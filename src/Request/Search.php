@@ -5,6 +5,7 @@ namespace LMS\Request;
 use LMS\Exception\LmsException;
 use LMS\Object\SearchObject;
 use LMS\Result\Search as SearchResult;
+use LmsBridge\Result\TingSearchFacet;
 
 /**
  * Class Search.
@@ -46,6 +47,13 @@ class Search implements SearchRequestInterface
      */
     protected $withMeta;
 
+    /**
+     * Include facets in request.
+     *
+     * @var bool
+     */
+    protected $withFacets;
+
     const SORT_RANKING = 'rank_general';
 
     const SORT_TITLE_ASCENDING = 'title_ascending';
@@ -82,12 +90,13 @@ class Search implements SearchRequestInterface
      * @param bool $withMeta
      *   Include additional meta-data.
      */
-    public function __construct($query, $page = 1, $amount = 10, $withMeta = false)
+    public function __construct($query, $page = 1, $amount = 10, $withMeta = false, $withFacets = false)
     {
         $this->query = $query;
         $this->page = $page;
         $this->amount = $amount;
         $this->withMeta = $withMeta;
+        $this->withFacets = $withFacets;
         $this->sorting = self::SORT_RANKING;
     }
 
@@ -169,6 +178,10 @@ class Search implements SearchRequestInterface
             $parameters['withMeta'] = '';
         }
 
+        if (true === $this->withFacets) {
+            $parameters['availableFacets'] = '';
+        }
+
         return $parameters;
     }
 
@@ -192,7 +205,19 @@ class Search implements SearchRequestInterface
             $objects[] = new SearchObject($rawObject);
         }
 
-        return new SearchResult($this, $objects, $hits);
+        $facets = [];
+        if (isset($rawData['facets'])) {
+            if (!array_key_exists('facets', $rawData)) {
+                throw new LmsException("Search result expects an 'facets' key in response body.");
+            }
+            $rawFacets = $rawData['facets'];
+
+            foreach ($rawFacets as $rawFacet) {
+                $facets[] = new TingSearchFacet($rawFacet['id'], $rawFacet['values']);
+            }
+        }
+
+        return new SearchResult($this, $objects, $hits, $facets);
     }
 
     /**
@@ -229,6 +254,22 @@ class Search implements SearchRequestInterface
     public function setWithMeta($withMeta)
     {
         $this->withMeta = (bool) $withMeta;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getWithFacets()
+    {
+        return $this->withFacets;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setWithFacets($withFacets)
+    {
+        $this->withFacets = (bool) $withFacets;
     }
 
     /**

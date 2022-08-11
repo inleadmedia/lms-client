@@ -101,4 +101,22 @@ interface SearchRequestInterface extends RequestInterface
      *   This instance.
      */
     public function setWithMeta($withMeta);
+
+    /**
+     * Get facets setting value.
+     *
+     * @return bool
+     *   Whether facets option is included.
+     */
+    public function getWithFacets();
+
+    /**
+     * Whether to include facets in result.
+     *
+     * @param bool $withFacets
+     *   Include facets in search result.
+     *
+     * @return mixed
+     */
+    public function setWithFacets($withFacets);
 }

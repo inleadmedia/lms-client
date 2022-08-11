@@ -30,4 +30,11 @@ interface SearchResultInterface extends ResultInterface
      *   Number of hits.
      */
     public function getHits();
+
+    /**
+     * Get the list of facets.
+     *
+     * @return array
+     */
+    public function getFacets();
 }
