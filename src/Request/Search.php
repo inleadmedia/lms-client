@@ -7,7 +7,6 @@ use LMS\Object\SearchObject;
 use LMS\Result\ResultInterface;
 use LMS\Result\Search as SearchResult;
 use LmsBridge\Result\TingSearchFacet;
-use LMS\Result\SearchResultInterface;
 
 /**
  * Class Search.
@@ -116,6 +115,8 @@ class Search implements SearchRequestInterface
     public function setAmount($amount): SearchRequestInterface
     {
         $this->amount = $amount;
+
+        return $this;
     }
 
     /**
@@ -240,6 +241,8 @@ class Search implements SearchRequestInterface
         }
 
         $this->sorting = $sorting;
+
+        return $this;
     }
 
     /**
@@ -255,7 +258,7 @@ class Search implements SearchRequestInterface
      */
     public function setWithMeta(bool $withMeta): SearchRequestInterface
     {
-        $this->withMeta = (bool) $withMeta;
+        $this->withMeta = $withMeta;
 
         return $this;
     }

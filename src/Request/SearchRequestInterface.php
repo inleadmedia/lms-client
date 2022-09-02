@@ -100,7 +100,7 @@ interface SearchRequestInterface extends RequestInterface
      * @return \LMS\Request\SearchRequestInterface
      *   This instance.
      */
-    public function setWithMeta($withMeta): SearchRequestInterface;
+    public function setWithMeta(bool $withMeta): SearchRequestInterface;
 
     /**
      * Get facets setting value.

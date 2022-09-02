@@ -92,7 +92,7 @@ class Search implements SearchResultInterface, \JsonSerializable
     /**
      * @return array
      */
-    public function getFacets()
+    public function getFacets(): array
     {
         $facets = [];
         foreach ($this->facets as $facet) {
