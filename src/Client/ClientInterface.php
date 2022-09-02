@@ -15,7 +15,7 @@ interface ClientInterface
      * @return string
      *   Service URL.
      */
-    public function getUrl();
+    public function getUrl(): string;
 
     /**
      * Sets service base URL.
@@ -26,7 +26,7 @@ interface ClientInterface
      * @return \LMS\Client\ClientInterface
      *   This instance.
      */
-    public function setUrl($serviceUrl);
+    public function setUrl(string $serviceUrl): ClientInterface;
 
     /**
      * Executes a request towards service.
@@ -37,5 +37,5 @@ interface ClientInterface
      * @return array
      *   Raw result array.
      */
-    public function execute(RequestInterface $request);
+    public function execute(RequestInterface $request): array;
 }

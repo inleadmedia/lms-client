@@ -4,13 +4,13 @@ namespace LMS\Request;
 
 use LMS\Object\SearchObject;
 use LMS\Result\Details as DetailsResult;
+use LMS\Result\ResultInterface;
 
 /**
  * Class Details.
  */
 class Details implements DetailsRequestInterface
 {
-
     protected $id;
 
     /**
@@ -19,7 +19,7 @@ class Details implements DetailsRequestInterface
      * @param string $id
      *   Item details identifier.
      */
-    public function __construct($id)
+    public function __construct(string $id)
     {
         $this->id = $id;
     }
@@ -27,7 +27,7 @@ class Details implements DetailsRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
@@ -35,7 +35,7 @@ class Details implements DetailsRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function parseResult(array $rawData)
+    public function parseResult(array $rawData): ResultInterface
     {
         return new DetailsResult($this, new SearchObject($rawData));
     }
@@ -43,7 +43,7 @@ class Details implements DetailsRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getUri()
+    public function getUri(): string
     {
         return 'detail';
     }
@@ -51,7 +51,7 @@ class Details implements DetailsRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return [
             'id' => $this->id
