@@ -31,6 +31,13 @@ class Search implements SearchResultInterface, \JsonSerializable
     protected $hits;
 
     /**
+     * Search result facets.
+     *
+     * @var array
+     */
+    protected $facets;
+
+    /**
      * Search constructor.
      *
      * @param \LMS\Request\RequestInterface $request
@@ -39,12 +46,15 @@ class Search implements SearchResultInterface, \JsonSerializable
      *   A set of result objects.
      * @param int $hits
      *   Number of hits.
+     * @param array $facets
+     *   Set of facets.
      */
-    public function __construct(RequestInterface $request, array $objects = [], $hits = 0)
+    public function __construct(RequestInterface $request, array $objects = [], $hits = 0, $facets = [])
     {
         $this->request = $request;
         $this->objects = $objects;
         $this->hits = $hits;
+        $this->facets = $facets;
     }
 
     /**
@@ -80,12 +90,26 @@ class Search implements SearchResultInterface, \JsonSerializable
     }
 
     /**
+     * @return array
+     */
+    public function getFacets()
+    {
+        $facets = [];
+        foreach ($this->facets as $facet) {
+            $facets[$facet->getName()] = $facet;
+        }
+
+        return $facets;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function jsonSerialize()
     {
         return [
             'objects' => $this->objects,
+            'facets' => $this->facets,
             'hitCount' => $this->hits,
         ];
     }
