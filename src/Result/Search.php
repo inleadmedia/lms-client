@@ -50,7 +50,7 @@ class Search implements SearchResultInterface, \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function getRequest()
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }
@@ -58,7 +58,7 @@ class Search implements SearchResultInterface, \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function getObjects()
+    public function getObjects(): array
     {
         return $this->objects;
     }
@@ -66,7 +66,7 @@ class Search implements SearchResultInterface, \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function getCount()
+    public function getCount(): int
     {
         return count($this->objects);
     }
@@ -74,7 +74,7 @@ class Search implements SearchResultInterface, \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function getHits()
+    public function getHits(): int
     {
         return $this->hits;
     }

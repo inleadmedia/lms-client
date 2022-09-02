@@ -41,7 +41,7 @@ class Details implements DetailsResultInterface, \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function getObject()
+    public function getObject(): SearchObject
     {
         return $this->object;
     }
@@ -49,7 +49,7 @@ class Details implements DetailsResultInterface, \JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function getRequest()
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }
