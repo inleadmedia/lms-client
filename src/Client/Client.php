@@ -10,20 +10,16 @@ use LMS\Request\RequestInterface;
  */
 class Client implements ClientInterface
 {
+
+    /**
+     * @var \LMS\Client\HttpTransportInterface
+     */
     private $transport;
 
     /**
-     * Client constructor.
-     *
-     * @param \LMS\Client\HttpTransportInterface $transport
-     *   HTTP transport instance.
-     *
-     * TODO: Logger.
+     * @var string
      */
-    public function __construct(HttpTransportInterface $transport)
-    {
-        $this->transport = $transport;
-    }
+    private $method;
 
     /**
      * Base url for LMS service.
@@ -31,6 +27,21 @@ class Client implements ClientInterface
      * @var string
      */
     private $serviceUrl;
+
+    /**
+     * Client constructor.
+     *
+     * @param \LMS\Client\HttpTransportInterface $transport
+     *   HTTP transport instance.
+     * @param $method
+     *
+     * TODO: Logger.
+     */
+    public function __construct(HttpTransportInterface $transport, string $method = 'GET')
+    {
+        $this->transport = $transport;
+        $this->method = $method;
+    }
 
     /**
      * {@inheritdoc}
@@ -52,6 +63,7 @@ class Client implements ClientInterface
 
     /**
      * {@inheritdoc}
+     * @throws \LMS\Exception\LmsException
      */
     public function execute(RequestInterface $request): array
     {
@@ -61,7 +73,13 @@ class Client implements ClientInterface
 
         $url = $this->serviceUrl . '/' . $request->getUri();
 
-        $transportResult = $this->transport->request('GET', $url, $request->getParameters(), []);
+        $transportResult = $this->transport->request(
+            $this->method,
+            $url,
+            $request->getParameters(),
+            $request->getData(),
+            []
+        );
         $this->validateTransportResult($transportResult);
 
         // TODO: Rely on object of some sort.
@@ -70,7 +88,9 @@ class Client implements ClientInterface
         if (null === $rawData || $transportResult['code'] != 200) {
             $message = !empty($rawData['message']) ? $rawData['message'] : ($transportResult['data'] ?? '');
 
-            throw new LmsException("Failed to request data from url '{$url}'. Response code '{$transportResult['code']}'. Response message '{$message}'.");
+            throw new LmsException("Failed to request data from url '{$url}'.
+                 Response code '{$transportResult['code']}'.
+                 Response message '{$message}'.");
         }
 
         return $rawData;
@@ -81,9 +101,10 @@ class Client implements ClientInterface
      *
      * @param array $result
      *   Raw http response.
+     *
      * @throws \LMS\Exception\LmsException
      */
-    private function validateTransportResult(array $result): void
+    private function validateTransportResult(array $result)
     {
         foreach (['data', 'code'] as $key) {
             if (!array_key_exists($key, $result)) {

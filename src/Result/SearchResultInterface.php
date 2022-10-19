@@ -7,6 +7,7 @@ namespace LMS\Result;
  */
 interface SearchResultInterface extends ResultInterface
 {
+
     /**
      * Gets the current objects count.
      *

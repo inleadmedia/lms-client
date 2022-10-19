@@ -9,6 +9,7 @@ use LMS\Object\SearchObject;
  */
 interface DetailsResultInterface extends ResultInterface
 {
+
     /**
      * Gets the actual object instance.
      *

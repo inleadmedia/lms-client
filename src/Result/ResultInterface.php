@@ -9,6 +9,7 @@ use LMS\Request\RequestInterface;
  */
 interface ResultInterface
 {
+
     /**
      * Gets the request object.
      *

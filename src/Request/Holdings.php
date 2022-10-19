@@ -3,7 +3,7 @@
 namespace LMS\Request;
 
 use LMS\Object\HoldingObject;
-use LMS\Result\Holdings as HoldingsResult;
+use LMS\Result\ResultInterface;
 
 /**
  * Class Holdings.
@@ -40,9 +40,9 @@ class Holdings implements HoldingsRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function parseResult(array $rawData)
+    public function parseResult(array $rawData): ResultInterface
     {
-        return $rawData;
+        // @TODO: Implement parseResult() method.
     }
 
     /**
@@ -54,16 +54,6 @@ class Holdings implements HoldingsRequestInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getParameters()
-    {
-        return [
-            'id' => $this->id,
-        ];
-    }
-
-    /**
      * Stringify the request object.
      *
      * @return string
@@ -72,5 +62,20 @@ class Holdings implements HoldingsRequestInterface
     public function __toString()
     {
         return implode('-', $this->getParameters());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParameters(): array
+    {
+        return [
+            'id' => $this->id,
+        ];
+    }
+
+    public function getData()
+    {
+        return [];
     }
 }

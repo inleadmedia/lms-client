@@ -1,44 +1,36 @@
 <?php
 
-namespace LMS\Object;
+namespace LMS\Object\Common;
 
 /**
- * Class SearchObject.
+ * Class Material
  *
- * TODO: Rely on interface of some sort.
+ * @package LMS\Object\Common
  */
-class SearchObject
+class Material
 {
 
-    public $id;
-
-    public $faustNumber;
-
-    public $bibliofilid;
-
+    /**
+     * @var
+     */
     public $title;
 
+    /**
+     * @var
+     */
     public $author;
 
+    /**
+     * @var
+     */
     public $type;
 
-    public $subject;
-
-    public $year;
-
-    public $description;
-
-    public $meta;
-
-    public $cover;
-
     /**
-     * SearchObject constructor.
+     * Material constructor.
      *
-     * @param array $data
-     *   Data array to populate the object with.
+     * @param $data
      */
-    public function __construct(array $data)
+    public function __construct($data)
     {
         foreach ($data as $k => $v) {
             $this->{$k} = $v;
@@ -47,6 +39,10 @@ class SearchObject
 
     /**
      * Magic getter.
+     *
+     * @param $name
+     *
+     * @return |null
      */
     public function __get($name)
     {
@@ -59,6 +55,11 @@ class SearchObject
 
     /**
      * Magic setter.
+     *
+     * @param $name
+     * @param $value
+     *
+     * @return \LMS\Object\Common\Material
      */
     public function __set($name, $value)
     {

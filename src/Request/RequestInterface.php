@@ -9,6 +9,7 @@ use LMS\Result\ResultInterface;
  */
 interface RequestInterface
 {
+
     /**
      * Gets uri path component for current action.
      *
