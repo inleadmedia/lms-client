@@ -24,14 +24,14 @@ class Holdings implements HoldingsResultInterface, JsonSerializable
     protected $holdings;
 
     /**
-     * Holldigs result class constructor.
+     * Holdings result class constructor.
      *
      * @param \LMS\Request\RequestInterface $request
      *   Request object.
      * @param array $holdings
      *   Material items holdings data.
      */
-    public function __construct(RequestInterface $request, $holdings)
+    public function __construct(RequestInterface $request, array $holdings)
     {
         $this->request = $request;
         $this->holdings = $holdings;
@@ -40,7 +40,7 @@ class Holdings implements HoldingsResultInterface, JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function getHoldings() : array
+    public function getHoldings(): array
     {
         return $this->holdings;
     }
@@ -48,7 +48,7 @@ class Holdings implements HoldingsResultInterface, JsonSerializable
     /**
      * {@inheritdoc}
      */
-    public function getRequest()
+    public function getRequest(): RequestInterface
     {
         return $this->request;
     }

@@ -4,6 +4,7 @@ namespace LMS\Request;
 
 interface AuthenticateRequestInterface
 {
+
     /**
      * @return string
      */

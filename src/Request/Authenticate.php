@@ -4,9 +4,12 @@ namespace LMS\Request;
 
 use LMS\Result\Authenticate as AuthenticateResult;
 use LMS\Result\ResultInterface;
+use LMS\Traits\WriteCredsToSession;
 
 class Authenticate implements AuthenticateRequestInterface, RequestInterface
 {
+    use WriteCredsToSession;
+
     protected $name;
 
     protected $pin;
@@ -24,20 +27,20 @@ class Authenticate implements AuthenticateRequestInterface, RequestInterface
     /**
      * {@inheritDoc}
      */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getParameters(): array
     {
         return [
             'user' => $this->getName(),
             'pin' => $this->getPin(),
         ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     /**
@@ -56,6 +59,11 @@ class Authenticate implements AuthenticateRequestInterface, RequestInterface
         return 'patron/info';
     }
 
+    public function getData()
+    {
+        return [];
+    }
+
     /**
      * @param array $rawData
      *
@@ -63,6 +71,8 @@ class Authenticate implements AuthenticateRequestInterface, RequestInterface
      */
     public function parseResult(array $rawData): ResultInterface
     {
+        $this->setSessionItem($this->name, $this->pin);
+
         return (new AuthenticateResult($this))
             ->setName($rawData['name'] ?? '')
             ->setAddress($rawData['address'] ?? [])

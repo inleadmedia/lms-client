@@ -2,6 +2,8 @@
 
 namespace LMS\Request;
 
+use LMS\Result\ResultInterface;
+
 class Availability implements AvailabilityRequestInterface
 {
 
@@ -40,6 +42,17 @@ class Availability implements AvailabilityRequestInterface
     }
 
     /**
+     * Stringify the request object.
+     *
+     * @return string
+     *   String representation of the request.
+     */
+    public function __toString()
+    {
+        return implode('-', $this->getParameters());
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getParameters(): array
@@ -49,22 +62,13 @@ class Availability implements AvailabilityRequestInterface
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function parseResult(array $rawData)
+    public function parseResult(array $rawData): ResultInterface
     {
-        return $rawData;
+        // TODO: Implement parseResult() method.
     }
 
-    /**
-     * Stringify the request object.
-     *
-     * @return string
-     *   String representation of the request.
-     */
-    public function __toString()
+    public function getData()
     {
-        return implode('-', $this->getParameters());
+        return [];
     }
 }

@@ -10,5 +10,5 @@ interface HoldingsResultInterface extends ResultInterface
      *
      * @return array
      */
-    public function getHoldings();
+    public function getHoldings(): array;
 }

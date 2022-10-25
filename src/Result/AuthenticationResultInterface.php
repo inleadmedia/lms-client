@@ -4,6 +4,7 @@ namespace LMS\Result;
 
 interface AuthenticationResultInterface
 {
+
     /**
      * @return string
      */

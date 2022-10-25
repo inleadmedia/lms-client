@@ -11,6 +11,7 @@ use LMS\Result\ResultInterface;
  */
 class Details implements DetailsRequestInterface
 {
+
     protected $id;
 
     /**
@@ -51,11 +52,9 @@ class Details implements DetailsRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function getParameters(): array
+    public function getData()
     {
-        return [
-            'id' => $this->id
-        ];
+        return [];
     }
 
     /**
@@ -67,5 +66,15 @@ class Details implements DetailsRequestInterface
     public function __toString()
     {
         return implode('-', $this->getParameters());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParameters(): array
+    {
+        return [
+            'id' => $this->id,
+        ];
     }
 }

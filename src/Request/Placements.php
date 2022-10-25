@@ -5,16 +5,19 @@ namespace LMS\Request;
 use LMS\Result\ResultInterface;
 
 /**
- * Class Branches.
+ * Class Placements
+ *
+ * @package LMS\Request
  */
-class Branches implements BranchesRequestInterface
+class Placements implements RequestInterface
 {
+
     /**
      * @inheritDoc
      */
     public function getUri(): string
     {
-        return 'branches';
+        return 'placements';
     }
 
     /**
@@ -25,6 +28,9 @@ class Branches implements BranchesRequestInterface
         return [];
     }
 
+    /**
+     * @return array
+     */
     public function getData()
     {
         return [];

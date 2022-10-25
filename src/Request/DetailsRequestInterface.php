@@ -7,6 +7,7 @@ namespace LMS\Request;
  */
 interface DetailsRequestInterface extends RequestInterface
 {
+
     /**
      * Gets object id.
      *

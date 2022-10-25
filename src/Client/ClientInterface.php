@@ -9,6 +9,7 @@ use LMS\Request\RequestInterface;
  */
 interface ClientInterface
 {
+
     /**
      * Gets service base URL.
      *

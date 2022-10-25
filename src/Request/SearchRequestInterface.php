@@ -7,6 +7,7 @@ namespace LMS\Request;
  */
 interface SearchRequestInterface extends RequestInterface
 {
+
     /**
      * Gets amount of results per page.
      *

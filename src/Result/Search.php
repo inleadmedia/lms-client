@@ -2,13 +2,17 @@
 
 namespace LMS\Result;
 
+use JsonSerializable;
 use LMS\Request\RequestInterface;
+use LmsBridge\Result\TingSearchFacet;
+use LmsBridge\Result\TingSearchFacetTerm;
 
 /**
  * Class LmsClientSearchResult.
  */
-class Search implements SearchResultInterface, \JsonSerializable
+class Search implements SearchResultInterface, JsonSerializable
 {
+
     /**
      * Set of result objects.
      *
@@ -33,7 +37,7 @@ class Search implements SearchResultInterface, \JsonSerializable
     /**
      * Search result facets.
      *
-     * @var array
+     * @var bool|object
      */
     protected $facets;
 
@@ -46,15 +50,53 @@ class Search implements SearchResultInterface, \JsonSerializable
      *   A set of result objects.
      * @param int $hits
      *   Number of hits.
-     * @param array $facets
-     *   Set of facets.
+     * @param object|bool $facets
+     *  Search result facets.
      */
-    public function __construct(RequestInterface $request, array $objects = [], $hits = 0, $facets = [])
-    {
+    public function __construct(
+        RequestInterface $request,
+        array $objects = [],
+        $hits = 0,
+        $facets = false
+    ) {
         $this->request = $request;
         $this->objects = $objects;
         $this->hits = $hits;
         $this->facets = $facets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFacets(): array
+    {
+
+        $facets = [];
+
+        // Bail out if we don't have any facets.
+        if (empty($this->facets)) {
+            return $facets;
+        }
+
+        /** @var \TingClientFacetResult $open_search_facet */
+        foreach ($this->facets as $lms_search_facet) {
+            // For each facet, extract data on the facet itself and its terms.
+            $facet = new TingSearchFacet($lms_search_facet['id']);
+            $terms = [];
+            foreach ($lms_search_facet['values'] as $term) {
+                if (count($term) == 3) {
+                    $terms[] = new TingSearchFacetTerm($term['name'], $term['frequence'], $term['value']);
+                } else {
+                    $terms[] = new TingSearchFacetTerm($term['value'], $term['frequence']);
+                }
+            }
+            $facet->setTerms($terms);
+            // Finish off by adding the facet to the list, keyed by its name as
+            // required by the interface.
+            $facets[$lms_search_facet['id']] = $facet;
+        }
+
+        return $facets;
     }
 
     /**
@@ -90,26 +132,12 @@ class Search implements SearchResultInterface, \JsonSerializable
     }
 
     /**
-     * @return array
-     */
-    public function getFacets(): array
-    {
-        $facets = [];
-        foreach ($this->facets as $facet) {
-            $facets[$facet->getName()] = $facet;
-        }
-
-        return $facets;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function jsonSerialize()
     {
         return [
             'objects' => $this->objects,
-            'facets' => $this->facets,
             'hitCount' => $this->hits,
         ];
     }
