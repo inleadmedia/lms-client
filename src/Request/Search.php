@@ -174,14 +174,16 @@ class Search implements SearchRequestInterface
     public function parseResult(array $rawData): ResultInterface
     {
         if (!array_key_exists('hitCount', $rawData)) {
-            throw new LmsException("Search result expects a 'hitCount' key in response body.");
+            //throw new LmsException("Search result expects a 'hitCount' key in response body.");
+            // @TODO:Log this.
         }
-        $hits = $rawData['hitCount'];
+        $hits = $rawData['hitCount'] ?? 0;
 
         if (!array_key_exists('objects', $rawData)) {
-            throw new LmsException("Search result expects an 'objects' key in response body.");
+            //throw new LmsException("Search result expects an 'objects' key in response body.");
+            // @TODO: Log this.
         }
-        $rawObjects = $rawData['objects'];
+        $rawObjects = $rawData['objects'] ?? [];
 
         $objects = [];
         foreach ($rawObjects as $rawObject) {
