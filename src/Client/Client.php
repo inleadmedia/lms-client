@@ -58,7 +58,7 @@ class Client implements ClientInterface
      */
     public function getUrl(): string
     {
-        return $this->getUrl();
+        return $this->serviceUrl;
     }
 
     /**
